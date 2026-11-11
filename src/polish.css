@@ -259,6 +259,27 @@ body {
   border-color: #d2dcf1;
   box-shadow: 0 20px 44px rgba(30, 48, 84, .10);
 }
+.project-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 202px;
+  overflow: hidden;
+  border-bottom: 1px solid #e6ebf4;
+  background: #f5f7fc;
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+}
+.project-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .35s ease;
+}
+.project:hover .project-image {
+  transform: scale(1.03);
+}
 .project-flow {
   position: relative;
   min-height: 202px;
@@ -313,6 +334,7 @@ body {
 .project-details summary { color: #526aab; font-size: 10px; font-weight: 650; }
 .project-details ul { color: #56657c; font-size: 10px; font-weight: 500; line-height: 1.75; }
 .project-details li::marker { color: #6a83c6; }
+.project-details li strong { color: #172943; font-weight: 600; }
 .more-github { margin-top: 25px; }
 .repo-note { color: #66758d; font-size: 10px; font-weight: 500; }
 
@@ -494,6 +516,7 @@ body {
   .skills-list dt { font-size: 11px; }
   .skills-list dd { font-size: 11px; }
   .projects-grid { grid-template-columns: 1fr; gap: 15px; }
+  .project-image-wrap { height: 180px; }
   .project-flow { min-height: 180px; padding: 22px 17px; }
   .project-flow ol { gap: 6px; }
   .project-flow li { min-height: 87px; padding: 9px; }
@@ -557,6 +580,27 @@ body {
 .project:hover {
   border-color: #ccd8ef;
   box-shadow: 0 22px 48px rgba(30, 48, 84, .11);
+}
+.project-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  border-bottom: 1px solid #e6ebf4;
+  background: #f5f7fc;
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+}
+.project-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .35s ease;
+}
+.project:hover .project-image {
+  transform: scale(1.03);
 }
 .project-flow {
   min-height: 210px;
@@ -684,12 +728,14 @@ body {
 @media (max-width: 700px) {
   .projects-section .section-title { margin-bottom: 27px; }
   .projects-grid { gap: 16px; }
+  .project-image-wrap { height: 184px; }
   .project-flow { min-height: 184px; padding: 23px 17px; }
   .project-info { padding: 21px 18px 19px; }
   .project-info h3 { font-size: 21px; }
 }
 
 @media (max-width: 380px) {
+  .project-image-wrap { height: 176px; }
   .project-flow { min-height: 176px; padding-inline: 12px; }
   .project-flow ol { gap: 6px; }
   .project-flow li { min-height: 89px; padding: 8px 7px; }
@@ -801,6 +847,27 @@ main { overflow-x: clip; }
 }
 .project:hover { transform: translateY(-6px); }
 .project::before { right: 28px; left: 28px; height: 4px; }
+.project-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 222px;
+  overflow: hidden;
+  border-bottom: 1px solid #dce4f1;
+  background: #f5f7fc;
+  border-top-left-radius: 21px;
+  border-top-right-radius: 21px;
+}
+.project-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .35s ease;
+}
+.project:hover .project-image {
+  transform: scale(1.03);
+}
 .project-flow {
   min-height: 222px;
   padding: 32px 28px;
@@ -910,6 +977,7 @@ main { overflow-x: clip; }
   .skills-list dd { font-size: 12px; }
   .projects-section .section-title { margin-bottom: 29px; }
   .projects-grid { gap: 18px; }
+  .project-image-wrap { height: 188px; }
   .project-flow { min-height: 188px; padding: 23px 17px; }
   .project-flow ol { gap: 7px; }
   .project-flow li { min-height: 91px; padding: 9px; }
@@ -923,6 +991,7 @@ main { overflow-x: clip; }
   .achievement-list li p { font-size: 10px; }
 }
 @media (max-width: 380px) {
+  .project-image-wrap { height: 178px; }
   .project-flow { min-height: 178px; padding-inline: 12px; }
   .project-flow ol { gap: 6px; }
   .project-flow li { min-height: 86px; padding: 7px; }
@@ -958,8 +1027,8 @@ main { overflow-x: clip; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project, .navigation .nav-resume, .hero-links a::after { transition-duration: .01ms; }
-  .project:hover, .navigation .nav-resume:hover { transform: none; }
+  .project, .project-image, .navigation .nav-resume, .hero-links a::after { transition-duration: .01ms; }
+  .project:hover, .project:hover .project-image, .navigation .nav-resume:hover { transform: none; }
   .project-flow li { transition-duration: .01ms; }
   .project-flow li:hover { transform: none; }
 }

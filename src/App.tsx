@@ -21,7 +21,59 @@ const navigation = [
   ['Contact', 'contact'],
 ] as const
 
-const projects = [
+interface ProjectStep {
+  title: string
+  detail: string
+}
+
+interface ProjectItem {
+  title: string
+  subtitle: string
+  description: string
+  technologies: string[]
+  href: string
+  sourceLabel?: string
+  liveHref?: string
+  image?: string
+  imageAlt?: string
+  flowLabel?: string
+  steps?: ProjectStep[]
+  detailsSummary?: string
+  details: (string | ReactNode)[]
+}
+
+const projects: ProjectItem[] = [
+  {
+    title: 'HireReady AI — Interview & Placement Simulator',
+    subtitle: 'AI Mock Interview & Placement Platform',
+    description:
+      "HireReady AI is a production-ready, AI-powered mock interview platform that simulates the complete recruitment lifecycle. It features an 'Approach-First' DSA coding round using voice interaction (Web Speech API) and Monaco Editor, a behavioral HR round with STAR method tracking, and an automated ATS resume scanner. Built with a dual-database architecture (PostgreSQL for state, MongoDB for AI transcripts), it includes a weighted scoring engine, dynamic PDF certificate generation, and a secure Admin dashboard.",
+    technologies: [
+      'React',
+      'TypeScript',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'MongoDB',
+      'Prisma',
+      'Tailwind CSS',
+      'Web Speech API',
+      'Monaco Editor',
+    ],
+    href: 'https://github.com/amame-aazam/Hireready-ai',
+    sourceLabel: 'GitHub',
+    liveHref: 'https://hireready-ai-wv33.vercel.app',
+    image: '/images/hireready-ai.png',
+    imageAlt: 'HireReady AI — Interview & Placement Simulator',
+    detailsSummary: 'Key features & technical architecture',
+    details: [
+      <><strong>🗣️ Voice-Driven AI Interviews:</strong> Replicates real-world technical and HR rounds with 7 distinct AI personas.</>,
+      <><strong>🧠 Approach-First DSA Round:</strong> Locks the Monaco code editor until the candidate explains their logic verbally.</>,
+      <><strong>📊 Server-Side Weighted Scoring:</strong> Calculates composite scores (Resume 15%, OA 25%, DSA 40%, HR 20%).</>,
+      <><strong>🛡️ Secure & Scalable:</strong> Uses HttpOnly JWT cookies, CORS policies, and a dual-database system (PostgreSQL + MongoDB).</>,
+      <><strong>📜 Auto-Generated Certificates:</strong> Dynamically generates PDF certificates for selected candidates.</>,
+    ],
+  },
   {
     title: 'ClassMark',
     subtitle: 'Role-based classroom management app',
@@ -260,7 +312,18 @@ function App() {
             <div className="projects-grid">
               {projects.map((project) => (
                 <article className="project" key={project.title}>
-                  <ProjectFlow label={project.flowLabel} steps={project.steps} />
+                  {project.image ? (
+                    <div className="project-image-wrap">
+                      <img
+                        src={project.image}
+                        alt={project.imageAlt || `${project.title} preview`}
+                        className="project-image"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : project.steps && project.flowLabel ? (
+                    <ProjectFlow label={project.flowLabel} steps={project.steps} />
+                  ) : null}
                   <div className="project-info">
                     <p className="project-kicker">{project.subtitle}</p>
                     <h3>{project.title}</h3>
@@ -269,15 +332,17 @@ function App() {
                       {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
                     </ul>
                     <div className="project-links">
-                      <ExternalLink href={project.href} className="source-link">View Source</ExternalLink>
+                      <ExternalLink href={project.href} className="source-link">
+                        {project.sourceLabel || 'View Source'}
+                      </ExternalLink>
                       {project.liveHref && (
                         <ExternalLink href={project.liveHref} className="source-link">Live Demo</ExternalLink>
                       )}
                     </div>
                     <details className="project-details">
-                      <summary>Technical notes</summary>
+                      <summary>{project.detailsSummary || 'Technical notes'}</summary>
                       <ul>
-                        {project.details.map((detail) => <li key={detail}>{detail}</li>)}
+                        {project.details.map((detail, index) => <li key={index}>{detail}</li>)}
                       </ul>
                     </details>
                   </div>
